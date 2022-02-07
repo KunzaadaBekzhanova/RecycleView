@@ -14,7 +14,7 @@
 
     <TextView
         android:id="@+id/textViewSmall"
-        android:layout_width="wrap_content"
+        android:layout_width="67dp"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall" />
 </LinearLayout>
