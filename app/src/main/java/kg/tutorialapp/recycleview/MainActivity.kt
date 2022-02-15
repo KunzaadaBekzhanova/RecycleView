@@ -3,8 +3,10 @@ package kg.tutorialapp.recycleview
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Context
+import android.content.Intent
 import android.os.Build
 import android.os.Bundle
+import android.view.View
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.NotificationCompat
@@ -12,10 +14,16 @@ import androidx.core.app.NotificationManagerCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
+
 class MainActivity : AppCompatActivity() {
 
     private val CHANNEL_ID = "channel_id_example_01"
     private val notificatoinId = 101
+    val WHERE_MY_CAT_ACTION = "kg.tutorialapp..action.CAT"
+    val ALARM_MESSAGE = "Срочно пришлите кота!"
+
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,6 +38,11 @@ class MainActivity : AppCompatActivity() {
         val button = findViewById<Button>(R.id.button)
         button.setOnClickListener{
             sendNotification()
+        }
+        val button1 = findViewById<Button>(R.id.button1)
+        button1.setOnClickListener{
+            sendMessage()
+
         }
     }
 
@@ -64,5 +77,11 @@ class MainActivity : AppCompatActivity() {
             notify(notificatoinId, builder.build())
         }
     }
-
+    fun sendMessage() {
+        val intent = Intent()
+        intent.action = WHERE_MY_CAT_ACTION
+        intent.putExtra("kg.tutorialapp.broadcast.Message", ALARM_MESSAGE)
+        intent.addFlags(Intent.FLAG_INCLUDE_STOPPED_PACKAGES)
+        sendBroadcast(intent)
+    }
 }
